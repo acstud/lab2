@@ -54,7 +54,7 @@ struct Image {
 
   ///@brief Return a single pixel value
   inline Pixel pixel(int x, int y) const {
-    return operator()(x,y);
+    return operator()(x, y);
   }
 
   ///@brief Access a single pixel
@@ -65,7 +65,7 @@ struct Image {
 
   ///@brief Access a single pixel value
   inline Pixel &pixel(int x, int y) {
-    return operator()(x,y);
+    return operator()(x, y);
   }
 
   ///@brief Test if image is approximately equal to right hand side image.
@@ -87,7 +87,7 @@ struct Image {
   const unsigned int colors = 4;
 
   /// @brief Error threshold used for approximately equal comparison.
-  const double error_threshold = 1.0;
+  const double error_threshold = 1e-6;
 
   /// @brief Print all pixel values on stdout. Not recommended for large images.
   std::string toString();

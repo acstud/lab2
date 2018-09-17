@@ -62,13 +62,13 @@ std::string Image::toString() {
   return ss.str();
 }
 
-bool Image::is_approximately_equal_to(const Image *other) const{
+bool Image::is_approximately_equal_to(const Image *other) const {
   if ((width != other->width) || (height != other->height)) {
     std::cerr << "Not approximately equal because dimensions are different." << std::endl;
     return false;
   }
 
-  // Calculate the error.
+  // Calculate the error on each channel
   double err[4] = {0.0};
   for (int y = 0; y < height; y++) {
     for (int x = 0; x < width; x++) {
@@ -85,8 +85,9 @@ bool Image::is_approximately_equal_to(const Image *other) const{
 
   for (int c = 0; c < colors; c++) {
     auto channel_err = err[c] / total_pixels;
-    std::cerr << "Channel " << c << " error: " << channel_err << std::endl;
     if (channel_err > error_threshold) {
+      std::cerr << "Channel " << c << " error threshold (" << error_threshold << ") exceeded."
+                << "Average pixel error: " << channel_err << std::endl;
       return false;
     }
   }
