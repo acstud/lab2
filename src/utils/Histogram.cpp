@@ -28,8 +28,8 @@ int Histogram::max(int channel) const {
 
   for (int c = cstart; c < cend; c++) {
     for (int i = 0; i < range; i++) {
-      if (max < count((unsigned char)i, c)) {
-        max = count((unsigned char)i, c);
+      if (max < count((unsigned char) i, c)) {
+        max = count((unsigned char) i, c);
       }
     }
   }
@@ -65,7 +65,7 @@ std::shared_ptr<Image> Histogram::toImage(unsigned int height_per_channel) const
       pixel.colors[c] = color;
 
       // Figure out the height of the histogram bar, but use dB
-      auto bar_height = (int) ((height_per_channel * count((unsigned char)i, c)) / scale);
+      auto bar_height = (int) ((height_per_channel * count((unsigned char) i, c)) / scale);
 
       // Draw the bar vertically
       for (int y = 0; y < bar_height; y++) {

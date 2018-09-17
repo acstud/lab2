@@ -25,7 +25,8 @@ sort of lab manual!
 
 ## Can I fork this repository as a student?
 
-Answer: __NO, DO NOT FORK IT (publicly)__
+Answer: __NO, DO NOT FORK IT (publicly)__. 
+See the Lab 1 statement about this.
 
 ## What is CUDA?
 CUDA is NVIDIA's proprietary (freeware) programming model for GPGPU. Originally 
@@ -136,10 +137,6 @@ Then, you must:
 We will run the following test for all images that are supplied:
 
 `imgproc-benchmark -a <image.png>`
-
-However, be aware that we will only copy the [src/students](src/students)
-back into our own baseline project. So anything you change outside that
-file will no work for us. Sorry!
 
 ## How do I use `nvprof` to profile my application?
 

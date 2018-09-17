@@ -26,6 +26,8 @@ __global__ void mul(float *a, float *b, float *c, int n) {
 }
 
 std::shared_ptr<Image> runWaterEffectCUDA(const Image *src, const WaterEffectOptions *options) {
+  /* REPLACE THIS CODE WITH YOUR OWN WATER EFFECT PIPELINE */
+
   std::cout << "Hello world compiled by the NVCC compiler!" << std::endl;
 
   float *a, *b, *c;
@@ -58,7 +60,6 @@ std::shared_ptr<Image> runWaterEffectCUDA(const Image *src, const WaterEffectOpt
   cudaFree(b);
   cudaFree(c);
 
-  /* REPLACE THIS CODE WITH YOUR OWN WATER EFFECT PIPELINE */
-
   return nullptr;
+  /* REPLACE THIS CODE WITH YOUR OWN WATER EFFECT PIPELINE */
 }
