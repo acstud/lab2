@@ -62,15 +62,17 @@ struct ProgramOptions {
 
     Timer tt;
 
-    // Start the total pipeline measurement.
-    tt.start();
-    auto img_baseline_result = runWaterEffect(img.get(), &water_opts);
-    // Stop the timer for the baseline pipeline.
-    tt.stop();
-    std::cout << "Full pipeline (baseline): " << tt.seconds() << " s." << std::endl;
+    if (water_opts.histogram || water_opts.enhance || water_opts.enhance || water_opts.blur || water_opts.ripple) {
+      // Start the total pipeline measurement.
+      tt.start();
+      auto img_baseline_result = runWaterEffect(img.get(), &water_opts);
+      // Stop the timer for the baseline pipeline.
+      tt.stop();
+      std::cout << "Full pipeline (baseline): " << tt.seconds() << " s." << std::endl;
 
-    // Save the final result.
-    img_baseline_result->toPNG("output/" + water_opts.img_name + "_result.png");
+      // Save the final result.
+      img_baseline_result->toPNG("output/" + water_opts.img_name + "_result.png");
+    }
 
     // Run the whole pipeline using CUDA
     if (cuda) {
