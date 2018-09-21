@@ -59,18 +59,20 @@ struct ProgramOptions {
   void run() {
     // Load the image.
     auto img = Image::fromPNG(input_file);
+    std::shared_ptr<Image> img_baseline_result;
 
     Timer tt;
 
-    if (water_opts.histogram || water_opts.enhance || water_opts.enhance || water_opts.blur || water_opts.ripple) {
-      // Start the total pipeline measurement.
-      tt.start();
-      auto img_baseline_result = runWaterEffect(img.get(), &water_opts);
-      // Stop the timer for the baseline pipeline.
-      tt.stop();
-      std::cout << "Full pipeline (baseline): " << tt.seconds() << " s." << std::endl;
+    // Start the total pipeline measurement.
+    tt.start();
+    img_baseline_result = runWaterEffect(img.get(), &water_opts);
+    // Stop the timer for the baseline pipeline.
+    tt.stop();
+    std::cout << "Full pipeline (baseline): " << tt.seconds() << " s." << std::endl;
 
-      // Save the final result.
+
+    // Save the final result if any image was produced
+    if (water_opts.enhance || water_opts.blur || water_opts.ripple) {
       img_baseline_result->toPNG("output/" + water_opts.img_name + "_result.png");
     }
 
@@ -147,7 +149,7 @@ int main(int argc, char *argv[]) {
         break;
       }
 
-      case 'n': po.water_opts.enhance_hist = true;
+      case 'n':po.water_opts.enhance_hist = true;
         break;
 
       case 'f': {
@@ -158,7 +160,7 @@ int main(int argc, char *argv[]) {
         break;
       }
 
-      case 'i': po.water_opts.save_intermediate = true;
+      case 'i':po.water_opts.save_intermediate = true;
         break;
 
       case 'r': {
