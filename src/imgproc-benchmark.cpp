@@ -72,7 +72,7 @@ struct ProgramOptions {
 
 
     // Save the final result if any image was produced
-    if (water_opts.enhance || water_opts.blur || water_opts.ripple) {
+    if (img_baseline_result != nullptr) {
       img_baseline_result->toPNG("output/" + water_opts.img_name + "_result.png");
     }
 

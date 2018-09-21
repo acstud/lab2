@@ -113,11 +113,8 @@ std::shared_ptr<Image> runWaterEffect(const Image *src, const WaterEffectOptions
   Timer ts;
 
   // Smart pointers to intermediate images:
-  std::shared_ptr<Image> img_blurred;
   std::shared_ptr<Histogram> hist;
-  std::shared_ptr<Image> img_enhanced;
-  std::shared_ptr<Image> img_rippled;
-  std::shared_ptr<Image> img_cuda;
+  std::shared_ptr<Image> img_result;
 
   // Histogram stage
   if (options->histogram) {
@@ -130,7 +127,10 @@ std::shared_ptr<Image> runWaterEffect(const Image *src, const WaterEffectOptions
   // Contrast enhancement stage
   if (options->enhance) {
     ts.start();
-    img_enhanced = runEnhanceStage(src, hist.get(), options);
+    if (hist == nullptr) {
+      throw std::runtime_error("Cannot run enhance stage without histogram.");
+    }
+    img_result = runEnhanceStage(src, hist.get(), options);
     ts.stop();
     std::cout << "Stage: Contrast enhance: " << ts.seconds() << " s." << std::endl;
   }
@@ -138,7 +138,11 @@ std::shared_ptr<Image> runWaterEffect(const Image *src, const WaterEffectOptions
   // Ripple effect stage
   if (options->ripple) {
     ts.start();
-    img_rippled = runRippleStage(img_enhanced.get(), options);
+    if (img_result == nullptr) {
+      img_result = runRippleStage(src, options);
+    } else {
+      img_result = runRippleStage(img_result.get(), options);
+    }
     ts.stop();
     std::cout << "Stage: Ripple effect:    " << ts.seconds() << " s." << std::endl;
   }
@@ -146,10 +150,14 @@ std::shared_ptr<Image> runWaterEffect(const Image *src, const WaterEffectOptions
   // Gaussian blur stage
   if (options->blur) {
     ts.start();
-    img_blurred = runBlurStage(img_rippled.get(), options);
+    if (img_result == nullptr) {
+      img_result = runBlurStage(src, options);
+    } else {
+      img_result = runBlurStage(img_result.get(), options);
+    }
     ts.stop();
     std::cout << "Stage: Blur:             " << ts.seconds() << " s." << std::endl;
   }
 
-  return img_blurred;
+  return img_result;
 }
