@@ -89,6 +89,8 @@ bool Image::is_approximately_equal_to(const Image *other) const {
       std::cerr << "Channel " << c << " error threshold (" << error_threshold << ") exceeded."
                 << "Average pixel error: " << channel_err << std::endl;
       return false;
+    } else {
+      std::cout << "Channel " << c << " average pixel error: " << channel_err << std::endl;
     }
   }
   return true;
