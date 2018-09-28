@@ -34,7 +34,7 @@ struct ProgramOptions {
 
   /// @brief Print usage information
   static void usage(char *argv[]) {
-    std::cerr << "Usage: " << argv[0] << "-hanmeifc -g G -r R <image.png>\n"
+    std::cerr << "Usage: " << argv[0] << " -hanmeifc -g G -r R <image.png>\n"
               << "Options:\n"
                  "  -h    Show help.\n"
                  "\n"
