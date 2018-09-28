@@ -87,7 +87,7 @@ struct Image {
   const unsigned int colors = 4;
 
   /// @brief Error threshold used for approximately equal comparison.
-  const double error_threshold = 1e-6;
+  const double error_threshold = 1e-3;
 
   /// @brief Print all pixel values on stdout. Not recommended for large images.
   std::string toString();
