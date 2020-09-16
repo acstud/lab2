@@ -1,4 +1,4 @@
-# Advanced Computing Systems 2019-2020 Lab 2 - CUDA
+# Advanced Computing Systems 2020-2021 Lab 2 - CUDA
 
 This repository contains all files and explanations needed to perform
 the second lab of the EE4C07 - Advanced Computing Systems course at the
