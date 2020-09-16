@@ -63,7 +63,7 @@ If you are in the project directory, you can type:
 ```console
 mkdir debug
 cd debug
-cmake ..
+cmake3 ..
 ```
 
 This will create a build directory, go into that directory, and lets CMake 
