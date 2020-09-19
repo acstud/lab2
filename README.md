@@ -160,7 +160,7 @@ Example:
 `nvprof --analysis-metrics --output-profile imgproc-benchmark.nvvp ./imgproc-benchmark -a ../images/42.png`
 
 After you've run your application within `nvprof`, you can then copy the file
-to your laptop/desktop and open it in the visual profiler tool. This [presentation](https://github.com/acstud/lab2/blob/master/lectureGPU_lab_updated.pdf) elaborates some more details with exaamples for using `nvprof`.
+to your laptop/desktop and open it in the visual profiler tool. This [presentation](https://github.com/acstud/lab2/blob/master/lectureGPU_lab_updated.pdf) elaborates some more details with examples on using `nvprof`.
 
 ## Which image should I use to profile / discuss my implementations in the report?
 
