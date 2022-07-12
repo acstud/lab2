@@ -132,6 +132,25 @@ Then, you must:
 
 * Implement the whole image processing pipeline using CUDA.
 
+## How to fix the error "cudaErrorNoKernelImageForDevice"?
+
+This error is caused by that the CUDA compiler using a higher [compute capabilities](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#compute-capabilities) than the GPU support. You can find your GPU model by typing:
+
+```console
+lspci | grep VGA
+```
+
+On the login node (e.g. login1.hpc.tudelft.nl) , you should find the GPU model is "Quadro K2200". You can find the maximum supported compute capability for K2200 is 5.0 in this [link](https://developer.nvidia.com/cuda-gpus). The [default compute capability](https://stackoverflow.com/questions/28932864/cuda-compute-capability-requirements) for CUDA 11.x is 5.2, which is a little higher than the device can support.
+
+So you need to tell the CUDA compiler that I want to use lower compute capability to compile my code. You can configure this at the cmake stage:
+
+```console
+cmake3 -DCMAKE_CUDA_FLAGS="-arch=compute_50" ..
+```
+
+Remember to clean your cmake cache before configuring your project.
+
+
 ## What will you run to test if I've implemented everything correctly?
 
 We will run the following test for all images that are supplied:
