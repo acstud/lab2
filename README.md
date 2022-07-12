@@ -11,7 +11,7 @@ Quick version:
 * Download the baseline project.
 * Implement each of the stages of an image processing pipeline using only CUDA 
     * You cannot use any CUDA-Accelerated Libraries or other external libraries,
-    only pure CUDA / C / C++.
+      only pure CUDA / C / C++.
 * Benchmark each of the stages.
 * Optimize the final pipeline as much as you can.
 * Write a report.
@@ -75,7 +75,7 @@ command line).
 Now you can build it with:
 
 ```console
-make
+make -j8
 ```
 
 And run it with
@@ -104,7 +104,7 @@ It performs the following steps. Suppose we start with the following image:
 2. Contrast enhancement.
     * We enhance the contrast by making the histogram "wider" for each channel.
     * In this way we get a "clearer" image:
-        
+
 ![Contrast enhanced image.](images/readme/42_enhanced.png)
 
 * Also look at the resulting histogram:
@@ -118,18 +118,18 @@ It performs the following steps. Suppose we start with the following image:
 
 4. Gaussian blur.
     * Because the ripple effect makes some parts of the image look rather
-    jagged, smooth the final image using a Gaussian blur.
-    
+      jagged, smooth the final image using a Gaussian blur.
+
 ![Rippled image.](images/readme/42_blurred.png)
 
 * That surely looks fancy!    
-    
+
 ## What should I do with the baseline project?
 
 You should read the baseline source code and figure out how to program works.
 
 Then, you must:
- 
+
 * Implement the whole image processing pipeline using CUDA.
 
 ## What will you run to test if I've implemented everything correctly?
