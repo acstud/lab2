@@ -187,6 +187,7 @@ The largest one, the other ones are supplied for debugging purposes.
 It is not recommended to start with the largest one.
 Only when you are sure your implementation is fully debugged for the smaller
 images, it makes sense to start the benchmarks on the largest one.
+Avoid running large images on the login node because the login node is for debugging purposes. Performance results from the login node might be inaccurate under heavy load.
 
 ## Where are the files that I have to implement?
 
