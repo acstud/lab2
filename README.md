@@ -157,6 +157,11 @@ We will run the following test for all images that are supplied:
 
 `imgproc-benchmark -a <image.png>`
 
+## Help, I am tired of typing these shell commands.
+
+You can write the commands in a shell script and execute it with `sh filename.sh`. All commands in that file will be automatically executed. A sample shell script to locally build and run the lab2 is provided in `auto_build_run.sh`.
+
+
 ## How do I use `nvprof` to profile my application?
 
 Just put `nvprof` in front of your application command.
