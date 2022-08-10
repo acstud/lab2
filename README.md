@@ -11,7 +11,7 @@ Quick version:
 * Download the baseline project.
 * Implement each of the stages of an image processing pipeline using only CUDA 
     * You cannot use any CUDA-Accelerated Libraries or other external libraries,
-    only pure CUDA / C / C++.
+      only pure CUDA / C / C++.
 * Benchmark each of the stages.
 * Optimize the final pipeline as much as you can.
 * Write a report.
@@ -75,7 +75,7 @@ command line).
 Now you can build it with:
 
 ```console
-make
+make -j8
 ```
 
 And run it with
@@ -104,7 +104,7 @@ It performs the following steps. Suppose we start with the following image:
 2. Contrast enhancement.
     * We enhance the contrast by making the histogram "wider" for each channel.
     * In this way we get a "clearer" image:
-        
+
 ![Contrast enhanced image.](images/readme/42_enhanced.png)
 
 * Also look at the resulting histogram:
@@ -118,25 +118,49 @@ It performs the following steps. Suppose we start with the following image:
 
 4. Gaussian blur.
     * Because the ripple effect makes some parts of the image look rather
-    jagged, smooth the final image using a Gaussian blur.
-    
+      jagged, smooth the final image using a Gaussian blur.
+
 ![Rippled image.](images/readme/42_blurred.png)
 
 * That surely looks fancy!    
-    
+
 ## What should I do with the baseline project?
 
 You should read the baseline source code and figure out how to program works.
 
 Then, you must:
- 
+
 * Implement the whole image processing pipeline using CUDA.
+
+## How to fix the error "cudaErrorNoKernelImageForDevice"?
+
+This error is caused by that the CUDA compiler using a higher [compute capabilities](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#compute-capabilities) than the GPU support. You can find your GPU model by typing:
+
+```console
+lspci | grep VGA
+```
+
+On the login node (e.g. login1.hpc.tudelft.nl) , you should find the GPU model is "Quadro K2200". You can find the maximum supported compute capability for K2200 is 5.0 in this [link](https://developer.nvidia.com/cuda-gpus). The [default compute capability](https://stackoverflow.com/questions/28932864/cuda-compute-capability-requirements) for CUDA 11.x is 5.2, which is a little higher than the device can support.
+
+So you need to tell the CUDA compiler that I want to use lower compute capability to compile my code. You can configure this at the cmake stage:
+
+```console
+cmake3 -DCMAKE_CUDA_FLAGS="-arch=compute_50" ..
+```
+
+Remember to clean your cmake cache before configuring your project.
+
 
 ## What will you run to test if I've implemented everything correctly?
 
 We will run the following test for all images that are supplied:
 
 `imgproc-benchmark -a <image.png>`
+
+## Help, I am tired of typing these shell commands.
+
+You can write the commands in a shell script and execute it with `sh filename.sh`. All commands in that file will be automatically executed. A sample shell script to locally build and run the lab2 is provided in `auto_build_run.sh`.
+
 
 ## How do I use `nvprof` to profile my application?
 
@@ -168,6 +192,7 @@ The largest one, the other ones are supplied for debugging purposes.
 It is not recommended to start with the largest one.
 Only when you are sure your implementation is fully debugged for the smaller
 images, it makes sense to start the benchmarks on the largest one.
+Avoid running large images on the login node because the login node is for debugging purposes. Performance results from the login node might be inaccurate under heavy load.
 
 ## Where are the files that I have to implement?
 
