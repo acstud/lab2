@@ -161,10 +161,21 @@ We will run the following test for all images that are supplied:
 
 You can write the commands in a shell script and execute it with `sh filename.sh`. All commands in that file will be automatically executed. A sample shell script to locally build and run the lab2 is provided in `auto_build_run.sh`.
 
+## How do I use `Nsight-system` to profile my application?
+
+The [Nsight-system](https://developer.nvidia.com/nsight-systems) becomes available when you load the CUDA toolkit. Use `nsys` to access its CLI version.
+
+An example of profiling your application with Nsight-system:
+
+`nsys profile  ./imgproc-benchmark -a ../images/42.png`
+
+After execution, you can find a report file called `report{x}.nsys-rep` in your build folder. Copy this file to your computer and open it with Nsight-system installed on your computer (CUDA-supported GPUs not required). You should be able to see a detailed visual result like the below.
+
+![Nsight system](https://github.com/twoentartian/lab2/raw/master/images/nsight_sys.png "Example Nsight system result")
 
 ## How do I use `nvprof` to profile my application?
 
-Just put `nvprof` in front of your application command.
+For students who do not want to install `Nsight-system` on their computers, you can try an obsolete tool called `nvprof`. Just put `nvprof` in front of your application command.
 
 Example:
 
