@@ -1,7 +1,7 @@
-# Advanced Computing Systems 2020-2021 Lab 2 - CUDA
+# Advanced Computing Systems 2022-2023 Lab 2 - CUDA
 
 This repository contains all files and explanations needed to perform
-the second lab of the EE4C07 - Advanced Computing Systems course at the
+the second lab of the CESE4010 - Advanced Computing Systems course at the
 Delft University of Technology.
 
 ## What do I have to do for Lab 2?
