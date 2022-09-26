@@ -126,7 +126,7 @@ It performs the following steps. Suppose we start with the following image:
 
 ## What should I do with the baseline project?
 
-You should read the baseline source code and figure out how to program works.
+You should read the baseline source code and figure out how the program works.
 
 Then, you must:
 
@@ -134,15 +134,15 @@ Then, you must:
 
 ## How to fix the error "cudaErrorNoKernelImageForDevice"?
 
-This error is caused by that the CUDA compiler using a higher [compute capabilities](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#compute-capabilities) than the GPU support. You can find your GPU model by typing:
+This error is caused by the fact that the CUDA compiler is using a higher [compute capabilities](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#compute-capabilities) than the GPU supports. You can find your GPU model by typing:
 
 ```console
 lspci | grep VGA
 ```
 
-On the login node (e.g. login1.hpc.tudelft.nl) , you should find the GPU model is "Quadro K2200". You can find the maximum supported compute capability for K2200 is 5.0 in this [link](https://developer.nvidia.com/cuda-gpus). The [default compute capability](https://stackoverflow.com/questions/28932864/cuda-compute-capability-requirements) for CUDA 11.x is 5.2, which is a little higher than the device can support.
+On the login node (e.g. login1.hpc.tudelft.nl), you should find that the GPU model is "Quadro K2200". You can find out that the maximum supported compute capability for the K2200 is 5.0 using this [link](https://developer.nvidia.com/cuda-gpus). The [default compute capability](https://stackoverflow.com/questions/28932864/cuda-compute-capability-requirements) for CUDA 11.x is 5.2, which is a little higher than what the device can support.
 
-So you need to tell the CUDA compiler that I want to use lower compute capability to compile my code. You can configure this at the cmake stage:
+So you need to tell the CUDA compiler that you want to use a lower compute capability to compile your code. You can configure this at the cmake stage:
 
 ```console
 cmake3 -DCMAKE_CUDA_FLAGS="-arch=compute_50" ..
@@ -159,17 +159,17 @@ We will run the following test for all images that are supplied:
 
 ## Help, I am tired of typing these shell commands.
 
-You can write the commands in a shell script and execute it with `sh filename.sh`. All commands in that file will be automatically executed. A sample shell script to locally build and run the lab2 is provided in `auto_build_run.sh`.
+You can write the commands in a shell script and execute it with `sh filename.sh`. All commands in that file will be automatically executed. A sample shell script to locally build and run lab2 is provided in `auto_build_run.sh`.
 
 ## How do I use `Nsight-system` to profile my application?
 
-The [Nsight-system](https://developer.nvidia.com/nsight-systems) becomes available when you load the CUDA toolkit. Use `nsys` to access its CLI version.
+[Nsight-system](https://developer.nvidia.com/nsight-systems) becomes available when you load the CUDA toolkit. Use `nsys` to access its CLI version.
 
 An example of profiling your application with Nsight-system:
 
 `nsys profile  ./imgproc-benchmark -a ../images/42.png`
 
-After execution, you can find a report file called `report{x}.nsys-rep` in your build folder. Copy this file to your computer and open it with Nsight-system installed on your computer (CUDA-supported GPUs not required). You should be able to see a detailed visual result like the below.
+After execution, you can find a report file called `report{x}.nsys-rep` in your build folder. Copy this file to your computer and open it with Nsight-system installed on your computer (CUDA-supported GPUs not required). You should be able to see a detailed visual result like the one below.
 
 ![Nsight system](https://github.com/twoentartian/lab2/raw/master/images/nsight_sys.png "Example Nsight system result")
 
