@@ -17,6 +17,7 @@
 #include "../baseline/water.hpp"
 
 #include "water_cuda.hpp"
+#include "cuda_check.hpp"
 
 // An example CUDA kernel
 __global__ void mul(float *a, float *b, float *c, int n) {
@@ -33,9 +34,9 @@ std::shared_ptr<Image> runWaterEffectCUDA(const Image *src, const WaterEffectOpt
   float *a, *b, *c;
 
   // Allocate some CUDA unified memory
-  cudaMallocManaged(&a, 4 * sizeof(float));
-  cudaMallocManaged(&b, 4 * sizeof(float));
-  cudaMallocManaged(&c, 4 * sizeof(float));
+  checkCudaErrors(cudaMallocManaged(&a, 4 * sizeof(float)));
+  checkCudaErrors(cudaMallocManaged(&b, 4 * sizeof(float)));
+  checkCudaErrors(cudaMallocManaged(&c, 4 * sizeof(float)));
 
   // Fill some dummy data
   for (int i = 0; i < 4; i++) {
@@ -46,9 +47,10 @@ std::shared_ptr<Image> runWaterEffectCUDA(const Image *src, const WaterEffectOpt
 
   // Start a kernel
   mul<<<1,1>>> (a, b, c, 4);
+  checkCudaErrors(cudaGetLastError());
 
   // Wait for completion
-  cudaDeviceSynchronize();
+  checkCudaErrors(cudaDeviceSynchronize());
 
   // Print the output
   for (int i = 0; i < 4; i++) {
@@ -56,9 +58,9 @@ std::shared_ptr<Image> runWaterEffectCUDA(const Image *src, const WaterEffectOpt
   }
 
   // Free the allocations
-  cudaFree(a);
-  cudaFree(b);
-  cudaFree(c);
+  checkCudaErrors(cudaFree(a));
+  checkCudaErrors(cudaFree(b));
+  checkCudaErrors(cudaFree(c));
 
   return nullptr;
   /* REPLACE THIS CODE WITH YOUR OWN WATER EFFECT PIPELINE */
