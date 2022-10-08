@@ -134,9 +134,14 @@ Then, you must:
 
 * Implement the whole image processing pipeline using CUDA.
 
-## How to fix the error "cudaErrorNoKernelImageForDevice"?
+## When you run your CUDA application on the login node
 
-This error is caused by the fact that the CUDA compiler is using a higher [compute capabilities](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#compute-capabilities) than the GPU supports. You can find your GPU model by typing:
+You may get some unexpected outcomes, such as:
+- The result from the login node is different from my laptop
+- "cudaErrorNoKernelImageForDevice"
+- The result is obviously wrong.
+
+These errors are caused by the fact that the CUDA compiler is using a higher [compute capabilities](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#compute-capabilities) than the GPU supports. You can find your GPU model by typing:
 
 ```console
 lspci | grep VGA
