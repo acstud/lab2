@@ -43,7 +43,9 @@ CUDA code.
 ## How do I install CUDA on my own computer?
 
 Even if you don't have an NVIDIA GPU, you can still install the CUDA toolkit.
-This is useful if you want to use the graphical profiling tool `nvprof`.
+This is useful if you want to use the graphical profiling tool `nvprof` and `nsight-sys`.
+
+For Ubuntu, you can install CUDA toolkit by `sudo apt install nvidia-cuda-toolkit`.
 
 * [NVIDIA CUDA Toolkit](https://developer.nvidia.com/cuda-toolkit)
 
