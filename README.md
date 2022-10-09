@@ -178,7 +178,7 @@ An example of profiling your application with Nsight-systems:
 
 After execution, you can find a report file called `report{x}.nsys-rep` in your build folder. Copy this file to your computer and open it with Nsight-systems installed on your computer (CUDA-supported GPUs not required). You should be able to see a detailed visual result like the one below.
 
-![Nsight systems](https://github.com/twoentartian/lab2/raw/master/images/nsight_sys.png "Example Nsight systems result")
+![Nsight systems](https://github.com/acstud/lab2/raw/master/images/nsight_sys.png "Example Nsight systems result")
 
 ## How do I use `nvprof` to profile my application?
 
