@@ -137,7 +137,7 @@ Then, you must:
 ## When you run your CUDA application on the login node
 
 You may get some unexpected outcomes, such as:
-- The result from the login node is different from my laptop
+- The result from the login node is different from your laptop
 - "cudaErrorNoKernelImageForDevice"
 - The result is obviously wrong.
 
