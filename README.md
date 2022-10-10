@@ -43,7 +43,9 @@ CUDA code.
 ## How do I install CUDA on my own computer?
 
 Even if you don't have an NVIDIA GPU, you can still install the CUDA toolkit.
-This is useful if you want to use the graphical profiling tool `nvprof`.
+This is useful if you want to use the graphical profiling tool `nvprof` and `nsight-sys`.
+
+For Ubuntu, you can install CUDA toolkit by `sudo apt install nvidia-cuda-toolkit`.
 
 * [NVIDIA CUDA Toolkit](https://developer.nvidia.com/cuda-toolkit)
 
@@ -132,9 +134,14 @@ Then, you must:
 
 * Implement the whole image processing pipeline using CUDA.
 
-## How to fix the error "cudaErrorNoKernelImageForDevice"?
+## When you run your CUDA application on the login node
 
-This error is caused by the fact that the CUDA compiler is using a higher [compute capabilities](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#compute-capabilities) than the GPU supports. You can find your GPU model by typing:
+You may get some unexpected outcomes, such as:
+- The result from the login node is different from my laptop
+- "cudaErrorNoKernelImageForDevice"
+- The result is obviously wrong.
+
+These errors are caused by the fact that the CUDA compiler is using a higher [compute capabilities](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#compute-capabilities) than the GPU supports. You can find your GPU model by typing:
 
 ```console
 lspci | grep VGA
@@ -171,7 +178,7 @@ An example of profiling your application with Nsight-systems:
 
 After execution, you can find a report file called `report{x}.nsys-rep` in your build folder. Copy this file to your computer and open it with Nsight-systems installed on your computer (CUDA-supported GPUs not required). You should be able to see a detailed visual result like the one below.
 
-![Nsight systems](https://github.com/twoentartian/lab2/raw/master/images/nsight_sys.png "Example Nsight systems result")
+![Nsight systems](https://github.com/acstud/lab2/raw/master/images/nsight_sys.png "Example Nsight systems result")
 
 ## How do I use `nvprof` to profile my application?
 
